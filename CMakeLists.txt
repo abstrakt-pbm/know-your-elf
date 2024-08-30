@@ -1,4 +1,4 @@
 cmake_minimum_required(VERSION 3.10)
-project( "KnowELF" )
+project( "Know Your ELF" )
 
-add_executable( KnowELF "main.cpp")
+add_executable( kye "main.cpp")
