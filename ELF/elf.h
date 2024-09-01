@@ -121,9 +121,106 @@ typedef struct {
     int e_shstrndx;
 } ELF_HEADER;
 
+enum P_TYPE {
+    PT_NULL,
+    PT_LOAD,
+    PT_DYNAMIC,
+    PT_INTERP,
+    PT_NOTE,
+    PT_SHLIB,
+    PT_PHDR,
+    PT_TLS,
+    PT_LOOS = 1610612736,
+    PT_HIOS = 1879048191,
+    PT_LOPROC = 1879048192,
+    PT_HIPROC = 2147483647
+};
+
+enum P_FLAG {
+    PF_X = 0x1,
+    PF_W = 0x2,
+    PF_R = 0x4,
+    PF_MASKOS = 0x0ff00000,
+    PF_MASKROC = 0xf0000000
+};
+
+typedef struct {
+    P_TYPE p_type;
+    P_FLAG p_flag;
+    int p_offset;
+    int p_vaddr;
+    int p_filesz;
+    int p_memsz;
+    int p_flags;
+    int p_align;
+} PROGRAM_HEADERS_SEGMENT;
+
+enum SH_TYPE {
+    SHT_NULL,
+    SHT_PROGBITS,
+    SHT_SYMTAB,
+    SHT_STRTAB,
+    SHT_RELA,
+    SHT_HASH,
+    SHT_DYNAMIC,
+    SHT_NOTE,
+    SHT_NOBITS,
+    SHT_REL,
+    SHT_SHLIB,
+    SHT_DYNSYM,
+    SHT_INIT_ARRAY = 14,
+    SHT_FINI_ARRAY,
+    SHT_PREINIT_ARRAY,
+    SHT_GROUP,
+    SHT_SYMTAB_SHNDX,
+    SHT_LOOS = 1610612736,
+    SHT_HIOS = 1879048191,
+    SHT_LOPROC = 1879048192,
+    SHT_HIPROC = 2147483647,
+    SHT_LOUSER = 2147483648 ,
+    SHT_HIUSER = 4294967295,
+};
+
+enum SH_FLAGS {
+    SHF_WRITE,
+    SHF_ALLOC,
+    SHF_EXECINSTR,
+    SHF_MERGE,
+    SHF_STRINGS,
+    SHF_INFO_LINK,
+    SHF_LINK_ORDER,
+    SHF_OS_NONCONFORMING,
+    SHF_GROUP,
+    SHF_TLS,
+    SHF_COMPRESSED,
+    SHF_MASKOS,
+    SHF_MASKPROC
+};
+
+enum SH_LINK {
+    SHT_DYNAMIC,
+    SHT_HASH,
+    SHT_REL,
+    SHT_SYMTAB,
+    SHT_GROUP,
+    SHT_SYMTAB_SHNDX
+};
+
+typedef struct {
+    int sh_name;
+    SH_TYPE sh_type;
+    SH_FLAGS sh_flags;
+    int sh_addr;
+    int sh_offset;
+    int sh_size;
+    SH_LINK sh_link;
+    int sh_info;
+    int sh_addralign;
+    int sh_entsize;
+
+} SECTION_HEADERS_SEGMENT;
 
 class ELF {
 public:
     ELF();
-
 };
