@@ -1,5 +1,7 @@
 #pragma once
 
+#include <filesystem>
+
 enum EI_CLASS {
     ELFCLASSNONE,
     ELFCLASS32,
@@ -220,7 +222,12 @@ typedef struct {
 
 } SECTION_HEADERS_SEGMENT;
 
+
 class ELF {
+private:
+    ELF_HEADER* elfHeaders;
 public:
-    ELF();
+    ELF(const std::filesystem::path path);
+    SECTION_HEADERS_SEGMENT* getAllSections();
+
 };
